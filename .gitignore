@@ -23,3 +23,45 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Test and coverage
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Packaging and build
+build/
+dist/
+sdist/
+downloads/
+wheels/
+*.egg-info/
+.eggs/
+*.egg
+MANIFEST
+
+# Type checking and tools
+.pyre/
+.pytype/
+.tox/
+.nox/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
