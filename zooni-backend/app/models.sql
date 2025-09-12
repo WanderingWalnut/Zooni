@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY,
+    phone_enc TEXT NOT NULL,
+    consent_ts INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS events (
+    id INTEGER PRIMARY KEY,
+    ts INTEGER NOT NULL,
+    type TEXT NOT NULL,
+    meta_json TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS broadcasts (
+    id INTEGER PRIMARY KEY,
+    ts INTEGER NOT NULL,
+    kind TEXT NOT NULL,
+    count_sent INTEGER NOT NULL
+);

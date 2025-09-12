@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Save on essentials</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            margin: 2rem;
+        }
+
+        .card {
+            max-width: 720px;
+            margin: auto;
+            padding: 1.25rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            margin: 0 0 0.75rem;
+        }
+
+        p {
+            color: #374151;
+        }
+
+        a.btn {
+            display: inline-block;
+            margin-top: 1rem;
+            background: #111827;
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Save on essentials today</h1>
+        <p>Exclusive discounts on groceries, gas, and more.</p>
+        <a class="btn" href="#">Browse perks</a>
+    </div>
+    <script>
+        window.addEventListener('load', () => {
+            fetch('/api/choose/perk', { method: 'POST' }).catch(() => { });
+        });
+    </script>
+</body>
+
+</html>
