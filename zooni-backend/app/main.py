@@ -26,7 +26,7 @@ from .crypto import decrypt_phone, is_hash_mode
 
 load_dotenv()
 
-APP_BASE_URL = os.getenv("APP_BASE_URL", "http://localhost:8000")
+APP_BASE_URL = os.getenv("APP_BASE_URL", "https://1d1eb3b6ef8a.ngrok-free.app")
 BASE_DIR = Path(__file__).resolve().parent
 
 app = FastAPI(title="Zooni Backend")
