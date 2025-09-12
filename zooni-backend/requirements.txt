@@ -3,9 +3,6 @@ uvicorn[standard]==0.30.6
 python-dotenv==1.0.1
 twilio==9.2.3
 cryptography==43.0.1
-<<<<<<< HEAD
-=======
 # Pin psycopg to a version with available binary wheels
 psycopg[binary,pool]==3.2.10
 python-multipart==0.0.9
->>>>>>> f61414f (Initialize repository (secrets removed; add safe .env.example))

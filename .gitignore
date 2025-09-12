@@ -65,3 +65,13 @@ MANIFEST
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
+<<<<<<< HEAD
+=======
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+.env.example
+>>>>>>> f61414f (Initialize repository (secrets removed; add safe .env.example))
