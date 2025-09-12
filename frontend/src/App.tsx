@@ -1,29 +1,36 @@
-import React, { useState } from 'react';
-import { 
-  ChevronDown, 
-  ChevronUp, 
-  DollarSign, 
-  Calendar, 
-  ShoppingCart, 
-  Shield, 
-  Users, 
-  TrendingUp, 
+import React, { useState } from "react";
+import {
+  ChevronDown,
+  ChevronUp,
+  DollarSign,
+  Calendar,
+  ShoppingCart,
+  Shield,
+  Users,
+  TrendingUp,
   Clock,
   BarChart3,
   MessageSquare,
   CheckCircle,
-  X
-} from 'lucide-react';
+  X,
+} from "lucide-react";
 
 function App() {
   const [activeAccordion, setActiveAccordion] = useState<number | null>(null);
   const [showToast, setShowToast] = useState(false);
+  const backendUrl =
+    (import.meta.env.VITE_BACKEND_URL as string) || "http://localhost:8000";
 
   const toggleAccordion = (index: number) => {
     setActiveAccordion(activeAccordion === index ? null : index);
   };
 
-  const handleReleaseShifts = () => {
+  const handleReleaseShifts = async () => {
+    try {
+      await fetch(`${backendUrl}/admin/push/shifts`, { method: "POST" });
+    } catch (e) {
+      // ignore
+    }
     setShowToast(true);
     setTimeout(() => setShowToast(false), 4000);
   };
@@ -31,7 +38,7 @@ function App() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -52,11 +59,9 @@ function App() {
       <header className="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div className="font-bold text-2xl text-teal-600">
-              Zooni
-            </div>
-            <button 
-              onClick={() => scrollToSection('manager-dashboard')}
+            <div className="font-bold text-2xl text-teal-600">Zooni</div>
+            <button
+              onClick={() => scrollToSection("manager-dashboard")}
               className="bg-teal-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             >
               Manager Dashboard
@@ -75,15 +80,15 @@ function App() {
                   Private money help + extra shifts, over SMS.
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                  Text SHORT to get wages early, request extra shifts, or claim everyday perks—totally private. 
-                  Managers only see aggregates.
+                  Text SHORT to get wages early, request extra shifts, or claim
+                  everyday perks—totally private. Managers only see aggregates.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button className="bg-teal-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
                     Text SHORT
                   </button>
-                  <button 
-                    onClick={() => scrollToSection('manager-dashboard')}
+                  <button
+                    onClick={() => scrollToSection("manager-dashboard")}
                     className="border-2 border-teal-600 text-teal-600 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-teal-50 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
                   >
                     See Manager Dashboard
@@ -114,7 +119,7 @@ function App() {
                 All completely private to you
               </p>
             </div>
-            
+
             <div className="grid md:grid-cols-3 gap-8">
               {/* Card A - EWA */}
               <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow relative">
@@ -129,10 +134,13 @@ function App() {
                   Get wages now
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  Access earned wages instantly when you need them most. No credit checks, no interest.
+                  Access earned wages instantly when you need them most. No
+                  credit checks, no interest.
                 </p>
-                <a 
-                  href="/#ewa" 
+                <a
+                  href={`${backendUrl}/ewa`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-block bg-teal-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
                 >
                   Open EWA
@@ -152,10 +160,13 @@ function App() {
                   Request extra shifts
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  Pick up additional hours when available. Get notified about opportunities that fit your schedule.
+                  Pick up additional hours when available. Get notified about
+                  opportunities that fit your schedule.
                 </p>
-                <a 
-                  href="/#shifts" 
+                <a
+                  href={`${backendUrl}/shifts`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-block bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
                 >
                   View Shifts
@@ -175,10 +186,13 @@ function App() {
                   Save on essentials
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  Claim percentage off everyday purchases through Perks. Groceries, gas, prescriptions and more.
+                  Claim percentage off everyday purchases through Perks.
+                  Groceries, gas, prescriptions and more.
                 </p>
-                <a 
-                  href="/#perks" 
+                <a
+                  href={`${backendUrl}/perks`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-block bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
                 >
                   Open Perks
@@ -204,37 +218,59 @@ function App() {
               {/* Metrics Grid */}
               <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
                 <div className="bg-gray-50 rounded-xl p-6 text-center">
-                  <div className="text-3xl font-bold text-teal-600 mb-2">32%</div>
-                  <div className="text-sm font-medium text-gray-600">Financial Stress Index</div>
+                  <div className="text-3xl font-bold text-teal-600 mb-2">
+                    32%
+                  </div>
+                  <div className="text-sm font-medium text-gray-600">
+                    Financial Stress Index
+                  </div>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-6 text-center">
-                  <div className="text-3xl font-bold text-orange-600 mb-2">127</div>
-                  <div className="text-sm font-medium text-gray-600">SHORT events (WTD)</div>
+                  <div className="text-3xl font-bold text-orange-600 mb-2">
+                    127
+                  </div>
+                  <div className="text-sm font-medium text-gray-600">
+                    SHORT events (WTD)
+                  </div>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-6 text-center">
-                  <div className="text-3xl font-bold text-teal-600 mb-2">89</div>
-                  <div className="text-sm font-medium text-gray-600">EWA clicks</div>
+                  <div className="text-3xl font-bold text-teal-600 mb-2">
+                    89
+                  </div>
+                  <div className="text-sm font-medium text-gray-600">
+                    EWA clicks
+                  </div>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-6 text-center">
-                  <div className="text-3xl font-bold text-orange-600 mb-2">24</div>
-                  <div className="text-sm font-medium text-gray-600">Shift requests</div>
+                  <div className="text-3xl font-bold text-orange-600 mb-2">
+                    24
+                  </div>
+                  <div className="text-sm font-medium text-gray-600">
+                    Shift requests
+                  </div>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-6 text-center">
-                  <div className="text-3xl font-bold text-purple-600 mb-2">156</div>
-                  <div className="text-sm font-medium text-gray-600">Perks clicks</div>
+                  <div className="text-3xl font-bold text-purple-600 mb-2">
+                    156
+                  </div>
+                  <div className="text-sm font-medium text-gray-600">
+                    Perks clicks
+                  </div>
                 </div>
               </div>
 
               {/* Chart Placeholder */}
               <div className="mb-8">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">7-Day Trend</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                  7-Day Trend
+                </h3>
                 <div className="bg-gray-50 rounded-xl p-6 h-64 flex items-center justify-center">
                   <div className="flex items-end justify-center gap-2 w-full max-w-md">
                     {[40, 65, 45, 80, 60, 85, 70].map((height, index) => (
                       <div
                         key={index}
                         className="bg-teal-400 rounded-t"
-                        style={{ height: `${height}%`, width: '12%' }}
+                        style={{ height: `${height}%`, width: "12%" }}
                       />
                     ))}
                   </div>
@@ -243,7 +279,7 @@ function App() {
 
               {/* Action Bar */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-6 border-t border-gray-100">
-                <button 
+                <button
                   onClick={handleReleaseShifts}
                   className="bg-teal-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
                 >
@@ -278,7 +314,8 @@ function App() {
                   Employee texts JOIN, then SHORT
                 </h3>
                 <p className="text-gray-600">
-                  Simple SMS setup. No app downloads or complex registration required.
+                  Simple SMS setup. No app downloads or complex registration
+                  required.
                 </p>
               </div>
 
@@ -290,7 +327,8 @@ function App() {
                   Receives 3 options privately
                 </h3>
                 <p className="text-gray-600">
-                  Instant access to wages, shifts, and perks—completely confidential to the employee.
+                  Instant access to wages, shifts, and perks—completely
+                  confidential to the employee.
                 </p>
               </div>
 
@@ -302,7 +340,8 @@ function App() {
                   Manager sees anonymous trends
                 </h3>
                 <p className="text-gray-600">
-                  Dashboard shows aggregate data only. Managers can open more shifts based on demand.
+                  Dashboard shows aggregate data only. Managers can open more
+                  shifts based on demand.
                 </p>
               </div>
             </div>
@@ -322,24 +361,32 @@ function App() {
               {[
                 {
                   question: "What data do managers see?",
-                  answer: "Aggregates only, never individual finances. Managers see overall trends like how many employees used EWA this week or requested extra shifts, but never personal financial details or who specifically made requests."
+                  answer:
+                    "Aggregates only, never individual finances. Managers see overall trends like how many employees used EWA this week or requested extra shifts, but never personal financial details or who specifically made requests.",
                 },
                 {
                   question: "Do I need an app?",
-                  answer: "No. SMS only. Everything works through simple text messages. No app downloads, no passwords to remember, no complex setup required."
+                  answer:
+                    "No. SMS only. Everything works through simple text messages. No app downloads, no passwords to remember, no complex setup required.",
                 },
                 {
                   question: "What are Perks?",
-                  answer: "Discounts on essentials like groceries, gas, and prescriptions. Access deals at major retailers and service providers to help stretch your paycheck further."
-                }
+                  answer:
+                    "Discounts on essentials like groceries, gas, and prescriptions. Access deals at major retailers and service providers to help stretch your paycheck further.",
+                },
               ].map((faq, index) => (
-                <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-100">
+                <div
+                  key={index}
+                  className="bg-white rounded-xl shadow-sm border border-gray-100"
+                >
                   <button
                     onClick={() => toggleAccordion(index)}
                     className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-inset rounded-xl"
                     aria-expanded={activeAccordion === index}
                   >
-                    <span className="font-semibold text-gray-900">{faq.question}</span>
+                    <span className="font-semibold text-gray-900">
+                      {faq.question}
+                    </span>
                     {activeAccordion === index ? (
                       <ChevronUp className="w-5 h-5 text-gray-500" />
                     ) : (
@@ -348,7 +395,9 @@ function App() {
                   </button>
                   {activeAccordion === index && (
                     <div className="px-6 pb-4">
-                      <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                      <p className="text-gray-600 leading-relaxed">
+                        {faq.answer}
+                      </p>
                     </div>
                   )}
                 </div>
@@ -367,9 +416,24 @@ function App() {
               <span className="text-gray-400">© 2025 Zooni</span>
             </div>
             <div className="flex items-center gap-6">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">Terms</a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">Contact</a>
+              <a
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                Privacy
+              </a>
+              <a
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                Terms
+              </a>
+              <a
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                Contact
+              </a>
             </div>
           </div>
         </div>
